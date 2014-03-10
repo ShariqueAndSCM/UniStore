@@ -1,4 +1,4 @@
-package UniversityStore;
+package UniStore;
 
 
 public class Main {
