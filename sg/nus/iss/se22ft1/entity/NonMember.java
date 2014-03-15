@@ -1,5 +1,5 @@
 package UniStore.sg.nus.iss.se22ft1.entity;
 
-public class NonMember {
-
+public class NonMember extends Customer{
+	
 }

@@ -16,7 +16,7 @@ public class FileOperations {
 	 * 		StringBuffer where each line is separated by '\n'
 	 * Made by: SCM
 	 */
-	
+
 	public static StringBuffer readFromFile(String path) {
 		// Line by Line
 		StringBuffer stringBuffer = new StringBuffer("");
@@ -37,7 +37,7 @@ public class FileOperations {
 	}
 
 	/*
-	 * Use: Used to write to a file.
+	 * Use: Used to append to a file.
 	 * Input: 
 	 * 		Path of the file
 	 * 		String that is to be written to the file
@@ -45,13 +45,36 @@ public class FileOperations {
 	 * 		None
 	 * Made by: SCM
 	 */
-	public static void writeToFile(String path, String textToWrite) {
+	public static void appendToFile(String path, String textToWrite) {
 		BufferedWriter writer = null;
 		try {
-			writer = new BufferedWriter(new FileWriter(path, true));// append
+			writer = new BufferedWriter(new FileWriter(path, true));// true = append, false = overwrite
 			writer.newLine();
 			writer.write(textToWrite);
-			System.out.println("Done");
+		} catch (IOException e) {
+		} finally {
+			try {
+				if (writer != null)
+					writer.close();
+			} catch (IOException e) {
+			}
+		}
+	}
+	
+	/*
+	 * Use: Used to overwrite a file.
+	 * Input: 
+	 * 		Path of the file
+	 * 		String that is to be written to the file
+	 * Output:
+	 * 		None
+	 * Made by: SCM
+	 */
+	public static void overwriteFile(String path, String textToWrite) {
+		BufferedWriter writer = null;
+		try {
+			writer = new BufferedWriter(new FileWriter(path, false));// true = append, false = overwrite
+			writer.write(textToWrite);
 		} catch (IOException e) {
 		} finally {
 			try {
