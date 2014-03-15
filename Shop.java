@@ -1,8 +1,8 @@
 package UniStore;
 
 
-public class Main extends Class2Test {
+public class Shop{
 	public static void main(String[] args) {
-		HelloWorld();
+		System.out.println("Hello");
 	}
 }
