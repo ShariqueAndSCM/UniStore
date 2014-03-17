@@ -49,12 +49,12 @@ public class CustomerManager {
 		return memberMap.get(id);
 	}
 	
-	public String arrayListToString() {
+	public String memberListToString() {
 		String s = "";
 		int i=1;
 		for (Iterator<Member> iterator = memberList.iterator(); iterator.hasNext();i++) {
 			Member member = (Member) iterator.next();
-			s+=member.getMemberName()+"," + member.getCustomerId()+","+member.getLoyaltyPoints();
+			s+=member.toString();
 			if(i<memberList.size()){
 				s+="\n";
 			}
@@ -64,7 +64,7 @@ public class CustomerManager {
 	
 	public void syncMemberSources(){
 		memberList = new ArrayList<Member>(memberMap.values());
-		FileOperations.overwriteFile(fileDetails, arrayListToString());		
+		FileOperations.overwriteFile(fileDetails, memberListToString());		
 	}
 	
 }
