@@ -1,12 +1,14 @@
 package UniStore;
 
 import UniStore.sg.nus.iss.se22ft1.frames.MainMenuFrame;
+import UniStore.sg.nus.iss.se22ft1.manager.CustomerManager;
 import UniStore.sg.nus.iss.se22ft1.manager.StoreKeeperManager;
 
 public class Shop {
 	public static final String path = "C:\\Users\\scm\\Desktop\\DAT\\";
 	
 	public static StoreKeeperManager storeKeeperManager = new StoreKeeperManager();
+	public static CustomerManager  customerManager = new CustomerManager();
 	
 	public static void main(String[] args) {
 		
@@ -42,5 +44,8 @@ public class Shop {
 	}
 	public static String createNewUser(String username,String password){
 		return (storeKeeperManager.createNewUser(username, password));
+	}
+	public static String generateMemberReport(){
+		return (customerManager.generateMemberReport());
 	}
 }

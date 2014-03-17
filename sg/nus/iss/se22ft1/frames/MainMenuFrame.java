@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.LayoutStyle;
 import javax.swing.SwingConstants;
 
+
 /**
 * This code was edited or generated using CloudGarden's Jigloo
 * SWT/Swing GUI Builder, which is free for non-commercial
@@ -30,6 +31,7 @@ public class MainMenuFrame extends JFrame{
 
 	private static final long serialVersionUID = 1319939780258060837L;
 	private JButton jButton1;
+	private AbstractAction ReportsScreenAction;
 	private AbstractAction NewUserAction;
 	private AbstractAction LogoutAction;
 	private AbstractAction ExitAction;
@@ -92,6 +94,7 @@ public class MainMenuFrame extends JFrame{
 			{
 				jButton3 = new JButton();
 				jButton3.setText("Generate Reports");
+				jButton3.setAction(getReportsScreenAction());
 			}
 				jPanel1Layout.setHorizontalGroup(jPanel1Layout.createSequentialGroup()
 				.addContainerGap(48, 48)
@@ -196,6 +199,20 @@ public class MainMenuFrame extends JFrame{
 			};
 		}
 		return NewUserAction;
+	}
+	
+	private AbstractAction getReportsScreenAction() {
+		if(ReportsScreenAction == null) {
+			ReportsScreenAction = new AbstractAction("Generate Reports", null) {
+				private static final long serialVersionUID = 8165726277767539871L;
+
+				public void actionPerformed(ActionEvent evt) {
+					new ReportsFrame().setVisible(true);
+					close();
+				}
+			};
+		}
+		return ReportsScreenAction;
 	}
 
 }
