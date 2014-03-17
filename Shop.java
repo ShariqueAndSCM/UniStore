@@ -1,6 +1,6 @@
 package UniStore;
 
-import UniStore.sg.nus.iss.se22ft1.frames.LoginFrame;
+import UniStore.sg.nus.iss.se22ft1.frames.MainMenuFrame;
 import UniStore.sg.nus.iss.se22ft1.manager.StoreKeeperManager;
 
 public class Shop {
@@ -10,10 +10,13 @@ public class Shop {
 	
 	public static void main(String[] args) {
 		
-		LoginFrame loginFrame = new LoginFrame();
+		/*LoginFrame loginFrame = new LoginFrame();
 		loginFrame.setVisible(true);
-		
+		*/
 		/*------------------------------------------------------------------------------------------*/
+		MainMenuFrame mmf = new MainMenuFrame();
+		mmf.setVisible(true);
+		
 		/*------------------------------------------------------------------------------------------*/
 		
 		/*Customer Checks
@@ -36,5 +39,8 @@ public class Shop {
 	
 	public static String checkCredentials(String username,String password){
 		return (storeKeeperManager.checkCredentials(username, password));
+	}
+	public static String createNewUser(String username,String password){
+		return (storeKeeperManager.createNewUser(username, password));
 	}
 }
