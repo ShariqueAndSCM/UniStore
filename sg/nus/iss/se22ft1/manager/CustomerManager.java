@@ -37,10 +37,22 @@ public class CustomerManager {
 		syncMemberSources();
 	}
 
-	public void addMember(String id, String name, int loyaltyPoints) {
-		Member m = new Member(name, id, loyaltyPoints);
-		memberMap.put(id, m);
-		syncMemberSources();
+	public String addMember(String id, String name, int loyaltyPoints) {
+		if (id == null && name == null) {
+			return "MISSING_PARAMETER";
+		}
+		if(id.equalsIgnoreCase("") && name.equalsIgnoreCase("")){
+			return "MISSING_PARAMETER";
+		}			
+		Member newMember = new Member(name, id, loyaltyPoints);
+		Member mTemp = getMemberFromMemberId(id);
+		if(mTemp != null){
+			return "ALREADY_EXISTS";
+		}else{
+			memberMap.put(id, newMember);
+			syncMemberSources();
+		}
+		return "MEMBER_ADDED";
 	}
 
 	public void deleteMember(String id) {

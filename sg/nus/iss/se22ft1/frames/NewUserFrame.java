@@ -166,8 +166,6 @@ public class NewUserFrame extends JFrame{
 						new MainMenuFrame().setVisible(true);
 						close();
 					}
-					
-					
 				}
 			};
 		}

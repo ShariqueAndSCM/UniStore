@@ -48,4 +48,7 @@ public class Shop {
 	public static String generateMemberReport(){
 		return (customerManager.generateMemberReport());
 	}
+	public static String addMember(String id, String name, int loyaltyPoints) {
+		return customerManager.addMember(id, name, loyaltyPoints);
+	}
 }

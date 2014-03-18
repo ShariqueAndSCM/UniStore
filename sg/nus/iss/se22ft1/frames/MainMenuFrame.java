@@ -34,6 +34,8 @@ public class MainMenuFrame extends JFrame{
 	private AbstractAction ReportsScreenAction;
 	private AbstractAction NewUserAction;
 	private AbstractAction LogoutAction;
+	private AbstractAction ManageProductsAction;
+	private AbstractAction ManageMemberAction;
 	private AbstractAction ExitAction;
 	private JPanel jPanel1;
 	private JButton jButton8;
@@ -86,10 +88,12 @@ public class MainMenuFrame extends JFrame{
 			{
 				jButton1 = new JButton();
 				jButton1.setText("Manage Products");
+				jButton1.setAction(getManageProductsAction());
 			}
 			{
 				jButton2 = new JButton();
 				jButton2.setText("Manage Members");
+				jButton2.setAction(getManageMemberAction());
 			}
 			{
 				jButton3 = new JButton();
@@ -154,11 +158,15 @@ public class MainMenuFrame extends JFrame{
 		}
 	}
 	
+	public void close() {
+		WindowEvent winClosingEvent = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
+		Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
+	}
+
 	private AbstractAction getExitAction() {
 		if(ExitAction == null) {
 			ExitAction = new AbstractAction("Exit", null) {
 				private static final long serialVersionUID = 2874734541122471460L;
-
 				public void actionPerformed(ActionEvent evt) {
 					System.exit(1);
 				}
@@ -172,28 +180,20 @@ public class MainMenuFrame extends JFrame{
 			LogoutAction = new AbstractAction("Logout", null) {
 				private static final long serialVersionUID = 5963268622676036899L;
 				public void actionPerformed(ActionEvent evt) {
-					LoginFrame lf = new LoginFrame();
-					lf.setVisible(true);
+					new LoginFrame().setVisible(true);
 					close();
-					
 				}
 			};
 		}
 		return LogoutAction;
 	}
 
-	public void close() {
-		WindowEvent winClosingEvent = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
-		Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
-	}
-	
 	private AbstractAction getNewUserAction() {
 		if(NewUserAction == null) {
 			NewUserAction = new AbstractAction("Create New User", null) {
 				private static final long serialVersionUID = 8287454350463289331L;
 				public void actionPerformed(ActionEvent evt) {
-					NewUserFrame nuf = new NewUserFrame();
-					nuf.setVisible(true);
+					new NewUserFrame().setVisible(true);
 					close();
 				}
 			};
@@ -205,7 +205,6 @@ public class MainMenuFrame extends JFrame{
 		if(ReportsScreenAction == null) {
 			ReportsScreenAction = new AbstractAction("Generate Reports", null) {
 				private static final long serialVersionUID = 8165726277767539871L;
-
 				public void actionPerformed(ActionEvent evt) {
 					new ReportsFrame().setVisible(true);
 					close();
@@ -213,6 +212,32 @@ public class MainMenuFrame extends JFrame{
 			};
 		}
 		return ReportsScreenAction;
+	}
+	
+	private AbstractAction getManageMemberAction() {
+		if(ManageMemberAction == null) {
+			ManageMemberAction = new AbstractAction("Manage Members", null) {
+				private static final long serialVersionUID = -5955808663145617639L;
+				public void actionPerformed(ActionEvent evt) {
+					new ManageMembersFrame().setVisible(true);
+					close();
+				}
+			};
+		}
+		return ManageMemberAction;
+	}
+	
+	private AbstractAction getManageProductsAction() {
+		if(ManageProductsAction == null) {
+			ManageProductsAction = new AbstractAction("Manage Products", null) {
+				private static final long serialVersionUID = -3180462046086878588L;
+				public void actionPerformed(ActionEvent evt) {
+					new ManageProductsFrame().setVisible(true);
+					close();
+				}
+			};
+		}
+		return ManageProductsAction;
 	}
 
 }

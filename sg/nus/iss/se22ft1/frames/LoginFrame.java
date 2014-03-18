@@ -20,6 +20,19 @@ import javax.swing.SwingConstants;
 import UniStore.Shop;
 
 
+
+/**
+* This code was edited or generated using CloudGarden's Jigloo
+* SWT/Swing GUI Builder, which is free for non-commercial
+* use. If Jigloo is being used commercially (ie, by a corporation,
+* company or business for any purpose whatever) then you
+* should purchase a license for each developer using Jigloo.
+* Please visit www.cloudgarden.com for details.
+* Use of Jigloo implies acceptance of these licensing terms.
+* A COMMERCIAL LICENSE HAS NOT BEEN PURCHASED FOR
+* THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED
+* LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
+*/
 public class LoginFrame extends JFrame{
 
 	public static final String MISSING_PARAMETER = "Username or Password is missing. Please try again!";
@@ -70,7 +83,7 @@ public class LoginFrame extends JFrame{
 			}
 			{
 				jButton2 = new JButton();
-				jButton2.setText("Cancel");
+				jButton2.setText("Cancel / Exit");
 				jButton2.setAction(getCancelAction());
 			}
 			{
@@ -158,8 +171,7 @@ public class LoginFrame extends JFrame{
 					}
 					jTextArea1.setText(returnValue);
 					if(returnValue.equals(VALID)){
-						MainMenuFrame mmf = new MainMenuFrame();
-						mmf.setVisible(true);
+						new MainMenuFrame().setVisible(true);
 						close();
 					}
 				}
@@ -170,7 +182,7 @@ public class LoginFrame extends JFrame{
 	
 	private AbstractAction getCancelAction() {
 		if(CancelAction == null) {
-			CancelAction = new AbstractAction("Cancel", null) {
+			CancelAction = new AbstractAction("Cancel / Exit", null) {
 				private static final long serialVersionUID = 7568639362782456849L;
 				public void actionPerformed(ActionEvent evt) {
 					System.exit(1);
