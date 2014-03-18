@@ -28,6 +28,7 @@ import javax.swing.SwingConstants;
 public class ManageProductsFrame extends JFrame{
 	private static final long serialVersionUID = -4520569018048511660L;
 	private JButton jButton1;
+	private AbstractAction NewCategoryAction;
 	private AbstractAction HomeAction;
 	private JPanel jPanel1;
 	private JButton jButton5;
@@ -53,6 +54,7 @@ public class ManageProductsFrame extends JFrame{
 			{
 				jButton2 = new JButton();
 				jButton2.setText("Create New Category");
+				jButton2.setAction(getNewCategoryAction());
 			}
 			{
 				jButton3 = new JButton();
@@ -109,5 +111,18 @@ public class ManageProductsFrame extends JFrame{
 	public void close() {
 		WindowEvent winClosingEvent = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
 		Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
+	}
+	
+	private AbstractAction getNewCategoryAction() {
+		if(NewCategoryAction == null) {
+			NewCategoryAction = new AbstractAction("Create New Category", null) {
+				private static final long serialVersionUID = 2834133528504051078L;
+				public void actionPerformed(ActionEvent evt) {
+					new NewCategoryFrame().setVisible(true);
+					close();
+				}
+			};
+		}
+		return NewCategoryAction;
 	}
 }

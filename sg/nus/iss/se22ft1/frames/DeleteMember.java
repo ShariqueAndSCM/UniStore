@@ -1,19 +1,21 @@
 package UniStore.sg.nus.iss.se22ft1.frames;
-import java.awt.BorderLayout;
+
+import java.awt.Component;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowEvent;
 import java.util.Iterator;
 import java.util.List;
-
 import javax.swing.AbstractAction;
+import javax.swing.GroupLayout;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-
+import javax.swing.LayoutStyle;
+import javax.swing.SwingConstants;
 import UniStore.Shop;
 import UniStore.sg.nus.iss.se22ft1.entity.Member;
-
 
 public class DeleteMember extends JFrame {
 	public static final String DELETE_SUCCESS = " has been removed.";
@@ -32,37 +34,64 @@ public class DeleteMember extends JFrame {
 		memberList.removeAll();
 		Iterator<Member> it = members.iterator();
 		while (it.hasNext()) {
-			memberList.add(Shop.toStringForDeleteScreen(it.next()));			
+			memberList.add(Shop.customersForDisplay(it.next()));			
 		}
 	}
+
 	public DeleteMember() {
 		setTitle("University Souvenir Store | Delete Member");
 		setSize(500,300); 
 		setLocationRelativeTo(null);
+		GroupLayout thisLayout = new GroupLayout((JComponent)getContentPane());
+		getContentPane().setLayout(thisLayout);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		{
 			jButton3 = new JButton();
-			getContentPane().add(jButton3);
 			jButton3.setText("Home");
 			jButton3.setAction(getHomeAction());
 		}
 		{
 			jButton1 = new JButton();
-			getContentPane().add(jButton1, BorderLayout.WEST);
 			jButton1.setText("Delete Member");
 			jButton1.setAction(getDeleteAction());
 		}
 		{
 			jButton2 = new JButton();
-			getContentPane().add(jButton2, BorderLayout.NORTH);
 			jButton2.setText("Cancel");
 			jButton2.setAction(getCancelAction());
-		}{
+		}
+		{
 			memberList = new java.awt.List (10);
 			memberList.setMultipleMode (false);
-			getContentPane().add(memberList);
 			refresh();
 		}
+			thisLayout.setVerticalGroup(thisLayout.createSequentialGroup()
+				.addContainerGap(18, Short.MAX_VALUE)
+				.addComponent(jButton3, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+				.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+				.addComponent(memberList, GroupLayout.PREFERRED_SIZE, 113, GroupLayout.PREFERRED_SIZE)
+				.addGap(51)
+				.addGroup(thisLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+				    .addComponent(jButton2, GroupLayout.Alignment.BASELINE, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)
+				    .addComponent(jButton1, GroupLayout.Alignment.BASELINE, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE))
+				.addContainerGap(20, 20));
+			thisLayout.setHorizontalGroup(thisLayout.createSequentialGroup()
+				.addContainerGap(65, 65)
+				.addGroup(thisLayout.createParallelGroup()
+				    .addGroup(thisLayout.createSequentialGroup()
+				        .addComponent(memberList, GroupLayout.PREFERRED_SIZE, 347, GroupLayout.PREFERRED_SIZE))
+				    .addGroup(GroupLayout.Alignment.LEADING, thisLayout.createSequentialGroup()
+				        .addComponent(jButton1, GroupLayout.PREFERRED_SIZE, 142, GroupLayout.PREFERRED_SIZE)
+				        .addGap(63)
+				        .addGroup(thisLayout.createParallelGroup()
+				            .addGroup(thisLayout.createSequentialGroup()
+				                .addComponent(jButton2, GroupLayout.PREFERRED_SIZE, 142, GroupLayout.PREFERRED_SIZE))
+				            .addGroup(GroupLayout.Alignment.LEADING, thisLayout.createSequentialGroup()
+				                .addGap(64)
+				                .addComponent(jButton3, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)))))
+				.addContainerGap(72, Short.MAX_VALUE));
+			thisLayout.linkSize(SwingConstants.VERTICAL, new Component[] {jButton1, jButton2});
+			thisLayout.linkSize(SwingConstants.HORIZONTAL, new Component[] {jButton1, jButton2});
 	}
 
 	public void close() {
@@ -103,7 +132,7 @@ public class DeleteMember extends JFrame {
 				public void actionPerformed(ActionEvent evt) {
 					Member memberToBeDeleted = getSelectedMember();
 					Shop.deleteMember(memberToBeDeleted);
-					//JOptionPane.showMessageDialog(jPanel1, memberToBeDeleted.getMemberName() + DELETE_SUCCESS);
+					JOptionPane.showMessageDialog(getContentPane(), memberToBeDeleted.getMemberName() + DELETE_SUCCESS);
 					System.out.println(memberToBeDeleted.getMemberName() + DELETE_SUCCESS);
 					refresh();
 				}

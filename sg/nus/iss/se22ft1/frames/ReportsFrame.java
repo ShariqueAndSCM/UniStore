@@ -33,6 +33,7 @@ import UniStore.Shop;
 public class ReportsFrame extends JFrame{
 	private static final long serialVersionUID = 8679742600994508451L;
 	private JButton jButton1;
+	private AbstractAction CategoryReportAction;
 	private AbstractAction MemberReportAction;
 	private AbstractAction HomeAction;
 	private JPanel jPanel1;
@@ -66,6 +67,7 @@ public class ReportsFrame extends JFrame{
 			{
 				jButton2 = new JButton();
 				jButton2.setText("Generate Category Reports");
+				jButton2.setAction(getCategoryReportAction());
 			}
 			{
 				jButton3 = new JButton();
@@ -156,5 +158,17 @@ public class ReportsFrame extends JFrame{
 			};
 		}
 		return MemberReportAction;
+	}
+	
+	private AbstractAction getCategoryReportAction() {
+		if(CategoryReportAction == null) {
+			CategoryReportAction = new AbstractAction("GenerateCategoryReport", null) {
+				private static final long serialVersionUID = 1L;
+				public void actionPerformed(ActionEvent evt) {
+					jTextArea1.setText(Shop.categoryReport());
+				}
+			};
+		}
+		return CategoryReportAction;
 	}
 }
