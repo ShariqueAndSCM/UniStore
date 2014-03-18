@@ -1,5 +1,8 @@
 package UniStore;
 
+import java.util.ArrayList;
+
+import UniStore.sg.nus.iss.se22ft1.entity.Member;
 import UniStore.sg.nus.iss.se22ft1.frames.MainMenuFrame;
 import UniStore.sg.nus.iss.se22ft1.manager.CustomerManager;
 import UniStore.sg.nus.iss.se22ft1.manager.StoreKeeperManager;
@@ -50,5 +53,14 @@ public class Shop {
 	}
 	public static String addMember(String id, String name, int loyaltyPoints) {
 		return customerManager.addMember(id, name, loyaltyPoints);
+	}
+	public static ArrayList<Member> getMembers(){
+		return CustomerManager.memberList;
+	}
+	public static String toStringForDeleteScreen(Member m){
+		return customerManager.toStringForDeleteScreen(m);
+	}
+	public static void deleteMember(Member m){
+		customerManager.deleteMember(m);
 	}
 }

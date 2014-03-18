@@ -21,8 +21,7 @@ public class CustomerManager {
 	public static ArrayList<Member> memberList;
 
 	public CustomerManager() {
-		String[] fromFile = FileOperations.readFromFile(fileDetails).toString()
-				.split("\n");
+		String[] fromFile = FileOperations.readFromFile(fileDetails).toString().split("\n");
 		String[] temp = null;
 		String name = "", id = "";
 		int loyalty = 0;
@@ -55,9 +54,11 @@ public class CustomerManager {
 		return "MEMBER_ADDED";
 	}
 
-	public void deleteMember(String id) {
-		memberMap.remove(id);
-		syncMemberSources();
+	public void deleteMember(Member m) {
+		if(m!= null){
+			memberMap.remove(m.getCustomerId());
+			syncMemberSources();
+		}
 	}
 
 	public Member getMemberFromMemberId(String id) {
@@ -89,6 +90,11 @@ public class CustomerManager {
 	public void syncMemberSources() {
 		memberList = new ArrayList<Member>(memberMap.values());
 		FileOperations.overwriteFile(fileDetails, memberListToString());
+	}
+
+	public String toStringForDeleteScreen(Member m) {
+		String s = "'" + m.getMemberName() + "' (" + m.getCustomerId() + ") with " + m.getLoyaltyPoints() + " loyalty points"; 
+		return s;
 	}
 
 }

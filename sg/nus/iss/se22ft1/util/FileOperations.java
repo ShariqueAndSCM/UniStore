@@ -49,7 +49,6 @@ public class FileOperations {
 		BufferedWriter writer = null;
 		try {
 			writer = new BufferedWriter(new FileWriter(path, true));// true = append, false = overwrite
-			writer.newLine();
 			writer.write(textToWrite);
 		} catch (IOException e) {
 		} finally {

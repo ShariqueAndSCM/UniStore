@@ -28,6 +28,7 @@ import javax.swing.SwingConstants;
 public class ManageMembersFrame extends JFrame{
 	private static final long serialVersionUID = -4520569018048511660L;
 	private JButton jButton1;
+	private AbstractAction DeleteMemberAction;
 	private AbstractAction NewMemberAction;
 	private AbstractAction HomeAction;
 	private JPanel jPanel1;
@@ -53,6 +54,7 @@ public class ManageMembersFrame extends JFrame{
 			{
 				jButton2 = new JButton();
 				jButton2.setText("Delete Member");
+				jButton2.setAction(getDeleteMemberAction());
 			}
 			{
 				jButton4 = new JButton();
@@ -114,5 +116,18 @@ public class ManageMembersFrame extends JFrame{
 			};
 		}
 		return NewMemberAction;
+	}
+	
+	private AbstractAction getDeleteMemberAction() {
+		if(DeleteMemberAction == null) {
+			DeleteMemberAction = new AbstractAction("Delete Member", null) {
+				private static final long serialVersionUID = -7469692590981492284L;
+				public void actionPerformed(ActionEvent evt) {
+					new DeleteMember().setVisible(true);
+					close();
+				}
+			};
+		}
+		return DeleteMemberAction;
 	}
 }
