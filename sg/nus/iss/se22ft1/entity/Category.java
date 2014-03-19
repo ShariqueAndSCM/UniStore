@@ -28,7 +28,6 @@ public class Category {
 		this.categoryCode = categoryCode;
 		this.categoryName = categoryName;
 		this.categoryFile = Shop.path + "Vendors"+getCategoryCode()+".dat";
-		System.out.println(categoryFile);
 		populateVendorsFromFile();	
 	}
 
@@ -61,7 +60,6 @@ public class Category {
 	}
 
 	private void populateVendorsFromFile() {
-		System.out.println(categoryFile);
 		File f = new File(categoryFile);
 		if(!f.exists() || f.isDirectory()){
 			System.out.println("Vendor file missing. System will Terminate.");
@@ -75,7 +73,6 @@ public class Category {
 			vendorName = temp[0];
 			vendorDescription = temp[1];
 			Vendor v = new Vendor(vendorName, vendorDescription);
-			System.out.println(v);
 			vendorList.add(v);
 		}
 	}
@@ -99,6 +96,17 @@ public class Category {
 	}
 	public void setVendorList(ArrayList<Vendor> vendorList) {
 		this.vendorList = vendorList;
+	}
+	public String addVendorToCategory(Vendor v){
+		for(Vendor vendor:vendorList){
+			if(vendor.getVendorName().equalsIgnoreCase(v.getVendorName())){
+				return "VENDOR_EXISTS";
+			}
+		}
+		this.vendorList.add(v);
+		writeVendorsToFile();
+		return "VENDOR_ADDED";
+		
 	}
 
 	@Override

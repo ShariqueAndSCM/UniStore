@@ -105,5 +105,11 @@ public class Shop {
 	public static String productReport(){
 		return productManager.productReport();
 	}
+	public static String[] getCategoryCodeArray(){
+		return categoryManager.getCategoryCodeArray();
+	}
+	public static String addVendor(String vendorName, String vendorDescription, String catgoryCode){
+		return categoryManager.addVendor(vendorName, vendorDescription, catgoryCode);
+	}
 	
 }

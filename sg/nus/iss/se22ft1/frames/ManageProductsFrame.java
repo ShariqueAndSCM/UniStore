@@ -28,6 +28,7 @@ import javax.swing.SwingConstants;
 public class ManageProductsFrame extends JFrame{
 	private static final long serialVersionUID = -4520569018048511660L;
 	private JButton jButton1;
+	private AbstractAction AddVendorAction;
 	private AbstractAction NewCategoryAction;
 	private AbstractAction HomeAction;
 	private JPanel jPanel1;
@@ -59,6 +60,7 @@ public class ManageProductsFrame extends JFrame{
 			{
 				jButton3 = new JButton();
 				jButton3.setText("Add Vendor");
+				jButton3.setAction(getAddVendorAction());
 			}
 			{
 				jButton4 = new JButton();
@@ -124,5 +126,18 @@ public class ManageProductsFrame extends JFrame{
 			};
 		}
 		return NewCategoryAction;
+	}
+	
+	private AbstractAction getAddVendorAction() {
+		if(AddVendorAction == null) {
+			AddVendorAction = new AbstractAction("Add Vendor", null) {
+				private static final long serialVersionUID = -2687179051493917697L;
+				public void actionPerformed(ActionEvent evt) {
+					new NewVendorFrame().setVisible(true);
+					close();
+				}
+			};
+		}
+		return AddVendorAction;
 	}
 }
