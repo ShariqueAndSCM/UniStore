@@ -1,7 +1,9 @@
 package UniStore.sg.nus.iss.se22ft1.manager;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 import UniStore.Shop;
 import UniStore.sg.nus.iss.se22ft1.entity.Category;
@@ -13,10 +15,10 @@ public class ProductManager {
 	public static final String fileName = "Products.dat";
 	public static String fileDetails = Shop.path + fileName;
 	public static ArrayList<Product> productList = new ArrayList<Product>();
+	private static Map<String, Integer> categorySequence = new HashMap<String, Integer>();
 
 	public ProductManager() {
-		String[] fromFile = FileOperations.readFromFile(fileDetails).toString()
-				.split("\n");
+		String[] fromFile = FileOperations.readFromFile(fileDetails).toString().split("\n");
 		String[] temp = null;
 		String productId = "";
 		String productName = "";
@@ -38,6 +40,7 @@ public class ProductManager {
 			reorderQuantity = Integer.parseInt(temp[6]);
 			orderQuantity = Integer.parseInt(temp[7]);
 			categoryCode = productId.substring(0, 3);
+			getUpdatedSequenceNumber(categoryCode);
 			Category c = Shop.getCategoryByCode(categoryCode);
 			Product p = new Product(productId, productName, productDescription,
 					quantityAvailable, price, barCodeNumber, reorderQuantity,
@@ -46,12 +49,15 @@ public class ProductManager {
 		}
 		syncProductSources();
 	}
-
-	public void addProduct(String productId, String productName,
+	
+	public void addProduct(String productName,
 			String productDescription, int quantityAvailable, float price,
 			int barCodeNumber, int reorderQuantity, int orderQuantity,
 			String categoryCode) {
 		Category c = Shop.getCategoryByCode(categoryCode);
+		categoryCode = categoryCode.substring(categoryCode.indexOf("(")+1, categoryCode.indexOf(")"));
+		int productSequence = getUpdatedSequenceNumber(categoryCode);
+		String productId = categoryCode + "/" + productSequence;
 		Product p = new Product(productId, productName, productDescription,
 				quantityAvailable, price, barCodeNumber, reorderQuantity,
 				orderQuantity, c);
@@ -91,10 +97,6 @@ public class ProductManager {
 					product.getQuantityAvailable(), product.getPrice(),
 					product.getProductDescription());
 			s += temp;
-					/*product.getProductId() + "\t" + product.getProductName()
-					+ "\t" + product.getQuantityAvailable() + "\t"
-					+ product.getPrice() + "\t"
-					+ product.getProductDescription();*/
 			if (i < productList.size()) {
 				s += "\n";
 			}
@@ -102,4 +104,16 @@ public class ProductManager {
 		return s;
 	}
 
+	public int getUpdatedSequenceNumber(String s){
+		Integer i = categorySequence.get(s);
+		if (i == null){
+			if(categorySequence == null){
+			}
+			categorySequence.put(s, 1);
+		}else{
+			i = categorySequence.get(s) + 1;
+			categorySequence.put(s, i++);
+		}
+		return categorySequence.get(s);
+	}
 }
