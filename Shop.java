@@ -2,6 +2,7 @@ package UniStore;
 
 import java.util.ArrayList;
 
+import UniStore.sg.nus.iss.se22ft1.entity.Category;
 import UniStore.sg.nus.iss.se22ft1.entity.Member;
 import UniStore.sg.nus.iss.se22ft1.frames.MainMenuFrame;
 import UniStore.sg.nus.iss.se22ft1.manager.CategoryManager;
@@ -22,12 +23,18 @@ public class Shop {
 		*/
 		
 		/*------------------------------------------------------------------------------------------*/
-		
 		MainMenuFrame mmf = new MainMenuFrame();
 		mmf.setVisible(true);
-		
 		/*------------------------------------------------------------------------------------------*/
-		
+		/*Products testing
+		ProductManager pb = new ProductManager();
+		ArrayList a = pb.productList;
+		Iterator it  = a.iterator();
+		while (it.hasNext()) {
+			Product object = (Product) it.next();
+			System.out.println(object.toString() + " is from " + object.getCategory().toString() + " category");
+		}
+		 */
 		/*Existing Category
 		CategoryManager cm = new CategoryManager();
 		System.out.println(cm.categoryListToString());
@@ -89,5 +96,8 @@ public class Shop {
 	}
 	public static boolean isDuplicate(String code){
 		return categoryManager.isDuplicate(code);
+	}
+	public static Category getCategoryByCode(String code){
+		return categoryManager.getCategoryByCode(code);
 	}
 }

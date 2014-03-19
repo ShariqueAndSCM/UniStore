@@ -96,4 +96,15 @@ public class CategoryManager {
 		}
 		return false;
 	}
+	
+	public Category getCategoryByCode(String code){		
+		Iterator<Category> it  = categoryList.iterator();
+		while (it.hasNext()) {
+			Category category = (Category) it.next();
+			if (code.equalsIgnoreCase(category.getCategoryCode())) {
+				return category;
+			}
+		}
+		return null;
+	}
 }
