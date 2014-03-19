@@ -2,6 +2,7 @@ package UniStore.sg.nus.iss.se22ft1.manager;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+
 import UniStore.Shop;
 import UniStore.sg.nus.iss.se22ft1.entity.Category;
 import UniStore.sg.nus.iss.se22ft1.entity.Product;
@@ -14,7 +15,8 @@ public class ProductManager {
 	public static ArrayList<Product> productList = new ArrayList<Product>();
 
 	public ProductManager() {
-		String[] fromFile = FileOperations.readFromFile(fileDetails).toString().split("\n");
+		String[] fromFile = FileOperations.readFromFile(fileDetails).toString()
+				.split("\n");
 		String[] temp = null;
 		String productId = "";
 		String productName = "";
@@ -44,7 +46,7 @@ public class ProductManager {
 		}
 		syncProductSources();
 	}
-	
+
 	public void addProduct(String productId, String productName,
 			String productDescription, int quantityAvailable, float price,
 			int barCodeNumber, int reorderQuantity, int orderQuantity,
@@ -74,5 +76,30 @@ public class ProductManager {
 	private void syncProductSources() {
 		FileOperations.overwriteFile(fileDetails, productListToString());
 	}
-	
+
+	public String productReport() {
+		String s = "\t\t\tList Of Products\n\t\t\t=================\n\n";
+		s+=String.format("%4s\t%20s\t%s\t%s\t%s",
+				"ID", "Name","Qty", "Price(S$)","Description");
+		s+= "\n--------------------------------------------------------------------------------------------\n";
+		int i = 1;
+		for (Iterator<Product> iterator = productList.iterator(); iterator
+				.hasNext(); i++) {
+			Product product = (Product) iterator.next();
+			String temp = String.format("%4s\t%20s\t%d\t%.2f\t\t%s",
+					product.getProductId(), product.getProductName(),
+					product.getQuantityAvailable(), product.getPrice(),
+					product.getProductDescription());
+			s += temp;
+					/*product.getProductId() + "\t" + product.getProductName()
+					+ "\t" + product.getQuantityAvailable() + "\t"
+					+ product.getPrice() + "\t"
+					+ product.getProductDescription();*/
+			if (i < productList.size()) {
+				s += "\n";
+			}
+		}
+		return s;
+	}
+
 }

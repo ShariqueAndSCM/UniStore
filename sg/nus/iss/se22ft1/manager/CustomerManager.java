@@ -80,10 +80,17 @@ public class CustomerManager {
 	}
 
 	public String generateMemberReport() {
-		String s = "\tList Of Members\n\t=============\n\nName\t  Member Id\t  Loyalty Points\n"
-				+ "----------------------------------------------------------------------\n"
-				+ memberListToString();
-		s = s.replaceAll(",", "\t  ");
+		String s = "\t\tList Of Members\n\t\t==================\n\n";
+		s+= String.format("%15s\t%15s\t\t%s","Name", "Member Id", "Loyalty Points");
+		s+= "\n--------------------------------------------------------\n";
+		Iterator<Member> it = memberList.iterator();
+		while (it.hasNext()) {
+			Member member = (Member) it.next();
+			String temp = String.format("%15s\t%15s\t\t%d",
+					member.getMemberName(), member.getCustomerId(), member.getLoyaltyPoints());
+			s+=temp + "\n";
+			
+		}
 		return s;
 	}
 

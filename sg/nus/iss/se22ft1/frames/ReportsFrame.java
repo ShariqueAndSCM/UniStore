@@ -1,6 +1,7 @@
 package UniStore.sg.nus.iss.se22ft1.frames;
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowEvent;
@@ -33,6 +34,7 @@ import UniStore.Shop;
 public class ReportsFrame extends JFrame{
 	private static final long serialVersionUID = 8679742600994508451L;
 	private JButton jButton1;
+	private AbstractAction ProductReportAction;
 	private AbstractAction CategoryReportAction;
 	private AbstractAction MemberReportAction;
 	private AbstractAction HomeAction;
@@ -63,6 +65,7 @@ public class ReportsFrame extends JFrame{
 			{
 				jTextArea1 = new JTextArea();
 				jTextArea1.setEditable(false);
+				jTextArea1.setFont(new Font("Courier New", Font.PLAIN, 12));
 			}
 			{
 				jButton2 = new JButton();
@@ -81,6 +84,7 @@ public class ReportsFrame extends JFrame{
 			{
 				jButton5 = new JButton();
 				jButton5.setText("Generate Product Report");
+				jButton5.setAction(getProductReportAction());
 			}
 			{
 				scrolltxt = new JScrollPane(jTextArea1);
@@ -170,5 +174,17 @@ public class ReportsFrame extends JFrame{
 			};
 		}
 		return CategoryReportAction;
+	}
+	
+	private AbstractAction getProductReportAction() {
+		if(ProductReportAction == null) {
+			ProductReportAction = new AbstractAction("Generate Product Report", null) {
+				private static final long serialVersionUID = 1L;
+				public void actionPerformed(ActionEvent evt) {
+					jTextArea1.setText(Shop.productReport());
+				}
+			};
+		}
+		return ProductReportAction;
 	}
 }

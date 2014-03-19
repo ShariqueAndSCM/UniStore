@@ -7,6 +7,7 @@ import UniStore.sg.nus.iss.se22ft1.entity.Member;
 import UniStore.sg.nus.iss.se22ft1.frames.MainMenuFrame;
 import UniStore.sg.nus.iss.se22ft1.manager.CategoryManager;
 import UniStore.sg.nus.iss.se22ft1.manager.CustomerManager;
+import UniStore.sg.nus.iss.se22ft1.manager.ProductManager;
 import UniStore.sg.nus.iss.se22ft1.manager.StoreKeeperManager;
 
 public class Shop {
@@ -15,6 +16,7 @@ public class Shop {
 	public static StoreKeeperManager storeKeeperManager = new StoreKeeperManager();
 	public static CustomerManager  customerManager = new CustomerManager();
 	public static CategoryManager  categoryManager = new CategoryManager();
+	public static ProductManager productManager= new ProductManager();
 	
 	public static void main(String[] args) {
 		
@@ -100,4 +102,8 @@ public class Shop {
 	public static Category getCategoryByCode(String code){
 		return categoryManager.getCategoryByCode(code);
 	}
+	public static String productReport(){
+		return productManager.productReport();
+	}
+	
 }
