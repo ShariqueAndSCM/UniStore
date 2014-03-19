@@ -6,7 +6,9 @@ import java.util.Iterator;
 import java.util.Map;
 
 import UniStore.Shop;
+import UniStore.sg.nus.iss.se22ft1.entity.Customer;
 import UniStore.sg.nus.iss.se22ft1.entity.Member;
+import UniStore.sg.nus.iss.se22ft1.entity.NonMember;
 import UniStore.sg.nus.iss.se22ft1.util.FileOperations;
 
 //Whenever any operations are performed, the Map is updated and syncMemberSources() is called
@@ -104,4 +106,28 @@ public class CustomerManager {
 		return s;
 	}
 
+	public Customer getCustomerFromId(String customerId){
+		Customer c = new NonMember();;
+		if("PUBLIC".equalsIgnoreCase(customerId)){
+			return new NonMember();
+		}
+		Iterator<Member> it = memberList.iterator();
+		while (it.hasNext()) {
+			Member member = (Member) it.next();
+			if(customerId.equalsIgnoreCase(member.getCustomerId())){
+				c = member;
+			}
+			
+		}
+		return c;
+	}
+
+	public boolean validateMemberID(String memberId) {
+		if("PUBLIC".equalsIgnoreCase(memberId))
+			return true;
+		else if(getCustomerFromId(memberId).getCustomerId().equalsIgnoreCase("PUBLIC")){
+			return false;
+		}
+		return true;
+	}
 }

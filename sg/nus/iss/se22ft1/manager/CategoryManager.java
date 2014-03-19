@@ -72,7 +72,7 @@ public class CategoryManager {
 	}
 
 	public String categoryReport() {
-		String s = "List Of Categories\n=============\n\nCode\tName\n----------------------------\n";
+		String s = "List Of Categories\n=================\n\nCode\tName\n----------------------------\n";
 		int i = 1;
 		for (Iterator<Category> iterator = categoryList.iterator(); iterator
 				.hasNext(); i++) {

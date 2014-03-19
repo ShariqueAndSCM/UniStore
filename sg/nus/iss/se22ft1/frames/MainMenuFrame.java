@@ -34,6 +34,7 @@ public class MainMenuFrame extends JFrame{
 	private AbstractAction ReportsScreenAction;
 	private AbstractAction NewUserAction;
 	private AbstractAction LogoutAction;
+	private AbstractAction BuyAction;
 	private AbstractAction ManageProductsAction;
 	private AbstractAction ManageMemberAction;
 	private AbstractAction ExitAction;
@@ -66,6 +67,7 @@ public class MainMenuFrame extends JFrame{
 				jButton5 = new JButton();
 				jButton5.setText("Make New Transaction");
 				jButton5.setBounds(240, 68, 135, 22);
+				jButton5.setAction(getBuyAction());
 			}
 			{
 				jButton6 = new JButton();
@@ -238,6 +240,19 @@ public class MainMenuFrame extends JFrame{
 			};
 		}
 		return ManageProductsAction;
+	}
+	
+	private AbstractAction getBuyAction() {
+		if(BuyAction == null) {
+			BuyAction = new AbstractAction("$$ Make Transaction", null) {
+				private static final long serialVersionUID = 2847352303518424625L;
+				public void actionPerformed(ActionEvent evt) {
+					new TransactionFrame().setVisible(true);
+					close();
+				}
+			};
+		}
+		return BuyAction;
 	}
 
 }

@@ -116,4 +116,23 @@ public class ProductManager {
 		}
 		return categorySequence.get(s);
 	}
+
+	public Product getProductFromProductId(String productId){
+		Product p = null;
+		for (Iterator<Product> iterator = productList.iterator(); iterator.hasNext();) {
+			Product product = (Product) iterator.next();
+			if (productId.equalsIgnoreCase(product.getProductId())) {
+				p = product;
+			}
+		}
+		return p;
+	}
+
+	public boolean validateProductId(String productId) {
+		if(getProductFromProductId(productId) == null)
+			return false;
+		else
+			return true;
+	}
+
 }

@@ -3,12 +3,15 @@ package UniStore;
 import java.util.ArrayList;
 
 import UniStore.sg.nus.iss.se22ft1.entity.Category;
+import UniStore.sg.nus.iss.se22ft1.entity.Customer;
 import UniStore.sg.nus.iss.se22ft1.entity.Member;
+import UniStore.sg.nus.iss.se22ft1.entity.Product;
 import UniStore.sg.nus.iss.se22ft1.frames.MainMenuFrame;
 import UniStore.sg.nus.iss.se22ft1.manager.CategoryManager;
 import UniStore.sg.nus.iss.se22ft1.manager.CustomerManager;
 import UniStore.sg.nus.iss.se22ft1.manager.ProductManager;
 import UniStore.sg.nus.iss.se22ft1.manager.StoreKeeperManager;
+import UniStore.sg.nus.iss.se22ft1.manager.TransactionManager;
 
 public class Shop {
 	public static final String path = "C:\\Users\\scm\\Desktop\\DAT\\";
@@ -17,6 +20,7 @@ public class Shop {
 	public static CustomerManager customerManager = new CustomerManager();
 	public static CategoryManager categoryManager = new CategoryManager();
 	public static ProductManager productManager = new ProductManager();
+	public static TransactionManager transactionManager = new TransactionManager();
 
 	public static void main(String[] args) {
 
@@ -142,5 +146,35 @@ public class Shop {
 		productManager.addProduct(productName, productDescription,
 				quantityAvailable, price, barCodeNumber, reorderQuantity,
 				orderQuantity, categoryCode);
+	}
+	public static Product getProductFromProductId(String productId){
+		return productManager.getProductFromProductId(productId);
+	}
+	public static Customer getCustomerFromId(String customerId){
+		return customerManager.getCustomerFromId(customerId);
+	}
+	public static String generateTransactionReport(){
+		return transactionManager.generateTransactionReport();
+	}
+	public static float getDiscountPercentage(){
+		return 5F;
+	}
+	public static boolean[] validate(String memberId, String productId, String productQuantity){
+		return transactionManager.validate(memberId, productId, productQuantity);
+	}
+
+	public static boolean validateMemberID(String memberId) {
+		return customerManager.validateMemberID(memberId);
+	}
+
+	public static boolean validateProductId(String productId) {
+		return productManager.validateProductId(productId);
+	}
+
+	public static String generateTransactionRecord(String memberId, String productId, String quantity){
+		return transactionManager.generateTransactionRecord(memberId, productId, quantity);
+	}
+	public static float calculateTotal(String productId, String quantity){
+		return transactionManager.calculateTotal(productId, quantity);
 	}
 }

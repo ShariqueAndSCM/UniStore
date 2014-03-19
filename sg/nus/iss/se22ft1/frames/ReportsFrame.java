@@ -34,6 +34,7 @@ import UniStore.Shop;
 public class ReportsFrame extends JFrame{
 	private static final long serialVersionUID = 8679742600994508451L;
 	private JButton jButton1;
+	private AbstractAction TransactionRepAction;
 	private AbstractAction ProductReportAction;
 	private AbstractAction CategoryReportAction;
 	private AbstractAction MemberReportAction;
@@ -80,6 +81,7 @@ public class ReportsFrame extends JFrame{
 			{
 				jButton4 = new JButton();
 				jButton4.setText("Generate Transaction Report");
+				jButton4.setAction(getTransactionRepAction());
 			}
 			{
 				jButton5 = new JButton();
@@ -186,5 +188,17 @@ public class ReportsFrame extends JFrame{
 			};
 		}
 		return ProductReportAction;
+	}
+	
+	private AbstractAction getTransactionRepAction() {
+		if(TransactionRepAction == null) {
+			TransactionRepAction = new AbstractAction("Generate Transaction Report", null) {
+				private static final long serialVersionUID = 1856034556939602036L;
+				public void actionPerformed(ActionEvent evt) {
+					jTextArea1.setText(Shop.generateTransactionReport());
+				}
+			};
+		}
+		return TransactionRepAction;
 	}
 }
