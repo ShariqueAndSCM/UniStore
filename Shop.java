@@ -15,6 +15,7 @@ import UniStore.sg.nus.iss.se22ft1.manager.TransactionManager;
 
 public class Shop {
 	public static final String path = "C:\\Users\\scm\\Desktop\\DAT\\";
+	public static final float discountPerPoint = 0.05F;
 
 	public static StoreKeeperManager storeKeeperManager = new StoreKeeperManager();
 	public static CustomerManager customerManager = new CustomerManager();
@@ -176,5 +177,8 @@ public class Shop {
 	}
 	public static float calculateTotal(String productId, String quantity){
 		return transactionManager.calculateTotal(productId, quantity);
+	}
+	public static Member getMemberFromMemberId(String id){
+		return customerManager.getMemberFromMemberId(id);
 	}
 }
